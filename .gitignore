@@ -1,0 +1,52 @@
+# Go specific
+*.exe
+*.exe~
+*.dll
+*.so
+*.dylib
+
+# Go build
+/bin/
+/pkg/
+/dist/
+/vendor/
+
+coverage.out
+coverage.html
+
+# OS specific
+.DS_Store
+Thumbs.db
+
+# Environment variables
+.env
+.env.local
+.env.*.local
+
+# IDE specific
+.vscode/
+.idea/
+*.iml
+
+# Logs
+/log/
+*.log
+
+# Test cache
+/.testcache
+$HOME
+
+# Dependency directories
+/Godeps/
+/vendor/
+
+# Node.js build artifacts
+node_modules/
+npm-debug.log
+yarn-error.log
+.yarn-integrity
+dist/
+build/
+.nyc_output/
+coverage/
+*.log
