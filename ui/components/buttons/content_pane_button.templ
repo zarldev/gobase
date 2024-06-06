@@ -1,0 +1,7 @@
+package buttons
+
+templ ContentPane(target, name string) {
+	<form hx-get={ target } hx-target="#content_pane" hx-swap="innerHTML transition:true" hx-trigger="click">
+		<button type="submit" class="btn btn-primary">{ name }</button>
+	</form>
+}

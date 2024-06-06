@@ -7,10 +7,9 @@
 
 # Go build
 /bin/
-/pkg/
 /dist/
 /vendor/
-
+/tmp/
 coverage.out
 coverage.html
 

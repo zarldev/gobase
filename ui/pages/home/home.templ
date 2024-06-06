@@ -1,0 +1,17 @@
+package home 
+
+import "github.com/zarldev/go-base/ui/layouts/base"
+
+templ Page() {
+	@base.Container() {
+		@Content()
+	}
+}
+
+templ Content() {
+	<div class="text-5xl text-red-500">
+		<h1 class="text-6xl">Index</h1>
+		<p>This is the home page</p>
+		<p>Here is a list of all the pages</p>
+	</div>
+}

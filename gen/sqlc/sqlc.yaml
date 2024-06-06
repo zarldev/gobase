@@ -1,0 +1,16 @@
+version: "2"
+sql:
+  - engine: "sqlite"
+    queries: "sqlite/queries.sql"
+    schema: "sqlite/schemas.sql"
+    gen:
+      go:
+        package: "repository"
+        out: "../../repository/sqlite"
+  - engine: "postgresql"
+    queries: "postgresql/queries.sql"
+    schema: "postgresql/schemas.sql"
+    gen:
+      go:
+        package: "repository"
+        out: "../../repository/postgresql"

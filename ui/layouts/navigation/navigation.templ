@@ -1,0 +1,14 @@
+package navigation 
+
+import
+(
+	"github.com/zarldev/go-base/ui/components/buttons"
+)
+
+templ Top() {
+	<div class="w-64 bg-gray-800 text-white p-4 text-center">
+		@buttons.ContentPane("/home", "Home")
+		@buttons.ContentPane("/profile", "Profile")
+		@buttons.ContentPane("/settings", "Settings")
+	</div>
+}
