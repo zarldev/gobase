@@ -3,20 +3,21 @@ run:
   modules-download-mode: readonly
 
 linters:
-  enable:
-    - errcheck
-    - goimports
-    - govet
-    - staticcheck
-    - gocyclo
-    - unparam
-    - prealloc
-    - unused
-    - misspell
-    - goconst
-    - gocritic
-    - gosec
-    
+  enable-all: true 
+  disable:
+    - execinquery
+    - gomnd
+    - depguard
+    - exhaustruct
+    - wsl
+    - nlreturn
+    - varnamelen
+    - gofumpt
+    - revive
+    - forbidigo
+    - gochecknoglobals
+    - stylecheck
+
 
 issues:
   exclude-use-default: false

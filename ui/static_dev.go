@@ -5,11 +5,11 @@
 package ui
 
 import (
-	"fmt"
+	"log/slog"
 	"net/http"
 )
 
 func StaticFileHandler() http.Handler {
-	fmt.Println("Running static file handler in dev mode.")
+	slog.Info("static file handler", slog.Any("mode", "dev"))
 	return http.FileServer(http.Dir("ui/static"))
 }

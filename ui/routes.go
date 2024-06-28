@@ -60,6 +60,7 @@ func SettingsHandler() http.HandlerFunc {
 func SettingsSaveHandler() http.HandlerFunc {
 	return func(w http.ResponseWriter, r *http.Request) {
 		fmt.Println("SettingsSaveHandler")
+
 		newName := r.FormValue("name")
 		newEmail := r.FormValue("email")
 		Render(r.Context(), settings.Page(
@@ -68,6 +69,10 @@ func SettingsSaveHandler() http.HandlerFunc {
 	}
 }
 
+const (
+	thirtyDays = 30 * 24 * time.Hour
+)
+
 func AuthHandler() http.HandlerFunc {
 	return func(w http.ResponseWriter, r *http.Request) {
 		fmt.Println("AuthHandler")
@@ -75,13 +80,13 @@ func AuthHandler() http.HandlerFunc {
 		http.SetCookie(w, &http.Cookie{
 			Name:     "token",
 			Value:    "123456789",
-			Expires:  time.Now().Add(time.Hour * 24 * 365),
+			Expires:  time.Now().Add(thirtyDays),
 			HttpOnly: true,
 		})
 		http.SetCookie(w, &http.Cookie{
 			Name:     "user",
 			Value:    "bruno",
-			Expires:  time.Now().Add(time.Hour * 24 * 365),
+			Expires:  time.Now().Add(thirtyDays),
 			HttpOnly: true,
 		})
 	}

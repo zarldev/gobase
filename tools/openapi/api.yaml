@@ -1,0 +1,81 @@
+openapi: 3.0.0
+info:
+  title: Go Routes API
+  version: 1.0.0
+paths:
+  /:
+    get:
+      summary: Landing page
+      responses:
+        '200':
+          description: Successful operation
+          content:
+            text/html:
+              schema:
+                $ref: '#/components/schemas/HtmlPageContent'
+  /user:
+    get:
+      summary: User's home page
+      responses:
+        '200':
+          description: Successful operation
+          content:
+            text/html:
+              schema:
+                $ref: '#/components/schemas/HtmlPageContent'
+  /home:
+    get:
+      summary: Home page
+      responses:
+        '200':
+          description: Successful operation
+          content:
+            text/html:
+              schema:
+                $ref: '#/components/schemas/HtmlPartialContent'
+  /profile:
+    get:
+      summary: Profile page
+      responses:
+        '200':
+          description: Successful operation
+          content:
+            text/html:
+              schema:
+                $ref: '#/components/schemas/HtmlPageContent'
+  /settings:
+    get:
+      summary: Settings page
+      responses:
+        '200':
+          description: Successful operation
+          content:
+            text/html:
+              schema:
+                $ref: '#/components/schemas/HtmlPageContent'
+    post:
+      summary: Save settings
+      requestBody:
+        required: true
+        content:
+          application/x-www-form-urlencoded:
+            schema:
+              type: object
+              properties:
+                name:
+                  type: string
+                email:
+                  type: string
+      responses:
+        '200':
+          description: Successful operation
+          content:
+            text/html:
+              schema:
+                $ref: '#/components/schemas/HtmlPageContent'
+components:
+  schemas:
+    HtmlPageContent:
+      type: string
+    HtmlPartialContent:
+      type: string

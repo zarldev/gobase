@@ -1,6 +1,9 @@
 /** @type {import('tailwindcss').Config} */
 module.exports = {
-  content: ["./views/**/*.templ"],
+  content: ['../ui/**/**/*.templ'],
+  options: {
+    defaultExtractor: content => content.match(/[\w-/:]+(?<!:)/g) || []
+  },
   theme: {
     extend: {
       textColor: ['group-hover'],
@@ -12,5 +15,4 @@ module.exports = {
       "@tailwindcss/line-clamp"
     ],
   },
-
 };

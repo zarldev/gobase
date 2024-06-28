@@ -3,40 +3,54 @@ package main
 import (
 	"context"
 	"fmt"
+	"log/slog"
 	"os"
 	"os/signal"
 	"syscall"
+	"time"
 
-	godotenv "github.com/joho/godotenv"
+	"github.com/zarldev/go-base/config"
 	"github.com/zarldev/go-base/ui"
 )
 
 func main() {
-	loadEnv()
-	fmt.Println("Welcome to the program.")
-	// start the program
-	cfg := getConfig()
-	go ui.StartUI(context.Background(), cfg)
-	// create a channel to receive OS signals
+	slog.Info("starting...")
+	startupInfo()
+	ctx := context.Background()
+	ctx, cancel := context.WithCancel(ctx)
+	ui.StartUI(ctx, ui.Config{Port: config.ENVIRONMENT.PORT})
+	slog.Info("started.")
+	waitForInterrupt(cancel)
+	slog.Info("shutdown.")
+}
+
+func startupInfo() {
+	slog.Info("build information:",
+		slog.String("name", config.ENVIRONMENT.NAME),
+		slog.String("version", config.ENVIRONMENT.VERSION),
+		slog.String("environment", config.ENVIRONMENT.ENV),
+		slog.String("build_tags", config.ENVIRONMENT.BUILD_TAGS),
+	)
+	slog.Info("runtime information:",
+		slog.String("log_level", config.ENVIRONMENT.LOG_LEVEL.String()),
+		slog.String("port", config.ENVIRONMENT.PORT),
+	)
+}
+
+func waitForInterrupt(cancel context.CancelFunc) {
 	sigs := make(chan os.Signal, 1)
-	// register the channel to receive SIGINT signals
 	signal.Notify(sigs, syscall.SIGINT)
-	fmt.Println("Press Ctrl+C to stop the program")
-	// wait for a SIGINT signal (Ctrl+C)
+	slog.Info("press ctrl+c to shutdown...")
 	<-sigs
-	fmt.Println("Program stopped.")
+	slog.Info("shutting down...")
+	closeResources(cancel, sigs)
 }
 
-func getConfig() ui.Config {
-	return ui.Config{
-		Port: os.Getenv("PORT"),
-	}
-}
-
-func loadEnv() {
-	// load environment variables
-	// you can
-	if err := godotenv.Load(); err != nil {
-		fmt.Println("Error loading .env file")
-	}
+func closeResources(cancel context.CancelFunc, sigs chan os.Signal) {
+	slog.Info("closing resources...")
+	_, _ = fmt.Fprintln(os.Stdout, "")
+	cancel()
+	close(sigs)
+	// wait for the server to shutdown
+	time.Sleep(1 * time.Second)
 }
