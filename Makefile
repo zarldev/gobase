@@ -20,6 +20,7 @@ setup:
 	@go install github.com/a-h/templ/cmd/templ@latest
 	@go install github.com/sqlc-dev/sqlc/cmd/sqlc@latest
 	@go install github.com/golangci/golangci-lint/cmd/golangci-lint@latest
+	@go install github.com/oapi-codegen/oapi-codegen/v2/cmd/oapi-codegen@latest
 
 	@npm install tailwindcss@latest postcss@latest autoprefixer@latest
 	@mv .env.example .env
