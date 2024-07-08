@@ -70,7 +70,3 @@ jobs:
       DIST_DIR: ${{ vars.DIST_DIR }}
       BUILD_TAGS: ${{ vars.BUILD_TAGS }}
       PORT: ${{ vars.PORT }}
-    steps:
-      - run: make setup
-      - run: make build
-      - run: make test
