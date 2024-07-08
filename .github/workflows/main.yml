@@ -27,7 +27,6 @@ jobs:
   test:
     runs-on: ubuntu-latest
     environment: development
-    needs: lint
     steps:
       - uses: actions/checkout@v3
       - uses: actions/setup-go@v4
@@ -35,37 +34,18 @@ jobs:
           go-version: '1.22.5'
       - run: make setup
       - run: make test
-  unit_tests:
-    name: "Unit tests"
+  coverage:
     runs-on: ubuntu-latest
+    environment: development
+    needs: test
     steps:
-      - name: Checkout repository
-        uses: actions/checkout@v4
-
-      - name: Setup Go
-        uses: actions/setup-go@v4
+      - uses: actions/checkout@v3
+      - uses: actions/setup-go@v4
         with:
-          go-version: ^1.22.5
-
-      # When you execute your unit tests, make sure to use the "-coverprofile" flag to write a 
-      # coverage profile to a file. You will need the name of the file (e.g. "coverage.txt")
-      # in the next step as well as the next job.
-      - name: Test
-        run: go test -cover -coverprofile=coverage.txt ./...
-
-      - name: Archive code coverage results
-        uses: actions/upload-artifact@v4
+          go-version: '1.22.5'
+      - uses: ncruces/go-coverage-report@v0
         with:
-          name: code-coverage
-          path: coverage.txt # Make sure to use the same file name you chose for the "-coverprofile" in the "Test" step
-  code_coverage:
-    name: "Code coverage report"
-    runs-on: ubuntu-latest
-    needs: unit_tests # Depends on the artifact uploaded by the "unit_tests" job
-    steps:
-      - name: Checkout repository
-        uses: actions/checkout@v4
-      - uses: fgrosse/go-coverage-report@v1.0.2 # Consider using a Git revision for maximum security
-        with:
-          coverage-artifact-name: "code-coverage" # can be omitted if you used this default value
-          coverage-file-name: "coverage.txt"
+          report: true
+          chart: true
+          amend: true
+  
