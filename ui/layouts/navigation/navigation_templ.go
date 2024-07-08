@@ -11,7 +11,7 @@ import "io"
 import "bytes"
 
 import (
-	"github.com/zarldev/go-base/ui/components/buttons"
+	"github.com/zarldev/gobase/ui/components/buttons"
 )
 
 func Top() templ.Component {

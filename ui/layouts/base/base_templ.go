@@ -11,7 +11,7 @@ import "io"
 import "bytes"
 
 import (
-	"github.com/zarldev/go-base/ui/layouts/navigation"
+	"github.com/zarldev/gobase/ui/layouts/navigation"
 )
 
 func Container() templ.Component {

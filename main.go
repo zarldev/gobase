@@ -9,17 +9,17 @@ import (
 	"syscall"
 	"time"
 
-	"github.com/zarldev/go-base/config"
-	"github.com/zarldev/go-base/ui"
+	"github.com/zarldev/gobase/config"
+	"github.com/zarldev/gobase/ui"
 )
 
 func main() {
 	slog.Info("starting...")
 	startupInfo()
-	ctx := context.Background()
-	ctx, cancel := context.WithCancel(ctx)
-	ui.StartUI(ctx, ui.Config{Port: config.ENVIRONMENT.PORT})
-	slog.Info("started.")
+	ctx, cancel := context.WithCancel(context.Background())
+	ui.StartUI(ctx, ui.Config{
+		Port: config.ENVIRONMENT.PORT,
+	})
 	waitForInterrupt(cancel)
 	slog.Info("shutdown.")
 }
@@ -42,13 +42,13 @@ func waitForInterrupt(cancel context.CancelFunc) {
 	signal.Notify(sigs, syscall.SIGINT)
 	slog.Info("press ctrl+c to shutdown...")
 	<-sigs
+	_, _ = fmt.Fprintf(os.Stdout, "\n")
 	slog.Info("shutting down...")
 	closeResources(cancel, sigs)
 }
 
 func closeResources(cancel context.CancelFunc, sigs chan os.Signal) {
 	slog.Info("closing resources...")
-	_, _ = fmt.Fprintln(os.Stdout, "")
 	cancel()
 	close(sigs)
 	// wait for the server to shutdown

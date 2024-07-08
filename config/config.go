@@ -7,12 +7,7 @@
 // The logger is available through the LOGGER variable or the standard slog package.
 package config
 
-import "log/slog"
-
 var (
-	ENVIRONMENT, LOGGER = loadConfig()
+	ENVIRONMENT = loadEnvironment()
+	LOGGER      = loadLogger()
 )
-
-func loadConfig() (*Environment, *slog.Logger) {
-	return loadEnvironment(), loadLogger()
-}

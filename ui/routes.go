@@ -6,10 +6,10 @@ import (
 	"time"
 
 	"github.com/go-chi/chi/v5"
-	"github.com/zarldev/go-base/ui/pages/home"
-	"github.com/zarldev/go-base/ui/pages/landing"
-	"github.com/zarldev/go-base/ui/pages/profile"
-	"github.com/zarldev/go-base/ui/pages/settings"
+	"github.com/zarldev/gobase/ui/pages/home"
+	"github.com/zarldev/gobase/ui/pages/landing"
+	"github.com/zarldev/gobase/ui/pages/profile"
+	"github.com/zarldev/gobase/ui/pages/settings"
 )
 
 func routes(r *chi.Mux) {

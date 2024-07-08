@@ -10,7 +10,7 @@ import "context"
 import "io"
 import "bytes"
 
-import "github.com/zarldev/go-base/ui/layouts/base"
+import "github.com/zarldev/gobase/ui/layouts/base"
 
 func Page() templ.Component {
 	return templ.ComponentFunc(func(ctx context.Context, templ_7745c5c3_W io.Writer) (templ_7745c5c3_Err error) {

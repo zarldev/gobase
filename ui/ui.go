@@ -33,14 +33,6 @@ func StartUI(ctx context.Context, config Config) {
 		IdleTimeout:  timeout15sec,
 	}
 	go func() {
-		slog.InfoContext(ctx, "listening for shutdown signal")
-		<-ctx.Done()
-		slog.InfoContext(ctx, "shutting down server")
-		if err := server.Shutdown(ctx); err != nil {
-			slog.ErrorContext(ctx, "failed to shutdown server", slog.Any("error", err))
-		}
-	}()
-	go func() {
 		slog.InfoContext(ctx, "starting server", slog.String("port", config.Port))
 		if err := server.ListenAndServe(); err != nil {
 			if errors.Is(err, http.ErrServerClosed) {
@@ -48,6 +40,14 @@ func StartUI(ctx context.Context, config Config) {
 				return
 			}
 			slog.ErrorContext(ctx, "failed to start server", slog.Any("error", err))
+		}
+	}()
+	go func() {
+		slog.InfoContext(ctx, "listening for shutdown signal")
+		<-ctx.Done()
+		slog.InfoContext(ctx, "shutting down ui server")
+		if err := server.Shutdown(ctx); err != nil {
+			slog.ErrorContext(ctx, "failed to shutdown server", slog.Any("error", err))
 		}
 	}()
 }

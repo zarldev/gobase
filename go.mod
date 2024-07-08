@@ -1,4 +1,4 @@
-module github.com/zarldev/go-base
+module github.com/zarldev/gobase
 
 go 1.22.3
 

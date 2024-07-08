@@ -1,6 +1,8 @@
 /** @type {import('tailwindcss').Config} */
 module.exports = {
-  content: ['../ui/**/**/*.templ'],
+  // this path is ran relative to the root directory 
+  // as per the tools.go generate commands
+  content: ['ui/**/**/*.templ'],
   options: {
     defaultExtractor: content => content.match(/[\w-/:]+(?<!:)/g) || []
   },
