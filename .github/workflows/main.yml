@@ -6,14 +6,14 @@ jobs:
   build:
     runs-on: ubuntu-latest
     env:
-      APP_NAME: ${{ env.APP_NAME }}
-      ENVIRONMENT: ${{ env.ENVIRONMENT }}
-      VERSION: ${{ env.VERSION }}
-      BINARY_NAME: ${{ env.BINARY_NAME }}
-      DOCKER_IMAGE_NAME: ${{ env.DOCKER_IMAGE_NAME }}
-      DIST_DIR: ${{ env.DIST_DIR }}
-      BUILD_TAGS: ${{ env.BUILD_TAGS }}
-      PORT: ${{ env.PORT }}
+      APP_NAME: gobase
+      ENVIRONMENT: ${ env.ENVIRONMENT }
+      VERSION: ${ env.VERSION }
+      BINARY_NAME: ${ env.BINARY_NAME }
+      DOCKER_IMAGE_NAME: ${ env.DOCKER_IMAGE_NAME }
+      DIST_DIR: ${ env.DIST_DIR }
+      BUILD_TAGS: ${ env.BUILD_TAGS }
+      PORT: ${ env.PORT }
     steps:
     - uses: actions/checkout@v3
     - uses: actions/setup-go@v4
