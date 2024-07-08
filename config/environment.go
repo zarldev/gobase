@@ -26,18 +26,22 @@ const (
 	Dev env = iota
 	Staging
 	Prod
+
+	devString     = "dev"
+	stagingString = "staging"
+	prodString    = "prod"
 )
 
 func (e env) String() string {
 	switch e {
 	case Dev:
-		return "dev"
+		return devString
 	case Staging:
-		return "staging"
+		return stagingString
 	case Prod:
-		return "prod"
+		return prodString
 	default:
-		return "dev"
+		return devString
 	}
 }
 
@@ -65,11 +69,11 @@ func buildEnvironment() *Environment {
 
 func ParseEnv(e *Environment, v string) {
 	switch strings.ToLower(v) {
-	case "dev":
+	case devString:
 		e.ENV = Dev
-	case "staging":
+	case stagingString:
 		e.ENV = Staging
-	case "prod":
+	case prodString:
 		e.ENV = Prod
 	default:
 		e.ENV = Dev
