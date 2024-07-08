@@ -43,6 +43,15 @@ jobs:
     runs-on: ubuntu-latest
     environment: development
     needs: coverage
+    env:
+      APP_NAME: gobase
+      ENVIRONMENT: ${{ vars.ENVIRONMENT }}
+      VERSION: ${{ vars.VERSION }}
+      BINARY_NAME: ${{ vars.BINARY_NAME }}
+      DOCKER_IMAGE_NAME: ${{ vars.DOCKER_IMAGE_NAME }}
+      DIST_DIR: ${{ vars.DIST_DIR }}
+      BUILD_TAGS: ${{ vars.BUILD_TAGS }}
+      PORT: ${{ vars.PORT }}
     steps:
       - uses: actions/checkout@v3
       - uses: actions/setup-go@v4
