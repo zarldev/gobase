@@ -3,6 +3,15 @@ name: gobase continuous integration
 on: [push, pull_request]
 
 jobs:
+  setup:
+    runs-on: ubuntu-latest
+    environment: development
+    steps:
+      - uses: actions/checkout@v3
+      - uses: actions/setup-go@v4
+        with:
+          go-version: '1.22.5'
+      - run: make setup
   lint:
     runs-on: ubuntu-latest
     environment: development
@@ -70,3 +79,7 @@ jobs:
       DIST_DIR: ${{ vars.DIST_DIR }}
       BUILD_TAGS: ${{ vars.BUILD_TAGS }}
       PORT: ${{ vars.PORT }}
+    steps:
+      - run: make setup
+      - run: make build
+      - run: make test
