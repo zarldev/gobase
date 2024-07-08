@@ -48,7 +48,6 @@ jobs:
         with:
           name: code-coverage
           path: coverage.txt # Make sure to use the same file name you chose for the "-coverprofile" in the "Test" step
-
   code_coverage:
     name: "Code coverage report"
     if: github.event_name == 'pull_request' # Do not run when workflow is triggered by push to main branch
