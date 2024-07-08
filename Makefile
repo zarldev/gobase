@@ -16,7 +16,7 @@ default: help
 
 setup:
 	@echo "Setting up development environment"
-	@go install github.com/cosmtrek/air@latest
+	@go install github.com/air-verse/air@latest
 	@go install github.com/a-h/templ/cmd/templ@latest
 	@go install github.com/sqlc-dev/sqlc/cmd/sqlc@latest
 	@go install github.com/golangci/golangci-lint/cmd/golangci-lint@latest
