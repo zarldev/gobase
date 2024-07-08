@@ -3,6 +3,10 @@ name: gobase continuous integration
 on: [push, pull_request]
 
 jobs:
+  lint:
+    runs-on: ubuntu-latest
+    environment: development
+    
   build:
     runs-on: ubuntu-latest
     environment: development
