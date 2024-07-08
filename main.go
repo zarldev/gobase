@@ -28,7 +28,7 @@ func startupInfo() {
 	slog.Info("build information:",
 		slog.String("name", config.ENVIRONMENT.NAME),
 		slog.String("version", config.ENVIRONMENT.VERSION),
-		slog.String("environment", config.ENVIRONMENT.ENV),
+		slog.String("environment", config.ENVIRONMENT.ENV.String()),
 		slog.String("build_tags", config.ENVIRONMENT.BUILD_TAGS),
 	)
 	slog.Info("runtime information:",
