@@ -1,18 +1,24 @@
-name: Go CI
+name: gobase continuous integration
 
 on: [push, pull_request]
 
 jobs:
   build:
     runs-on: ubuntu-latest
+    env:
+      APP_NAME: ${{ env.APP_NAME }}
+      ENVIRONMENT: ${{ env.ENVIRONMENT }}
+      VERSION: ${{ env.VERSION }}
+      BINARY_NAME: ${{ env.BINARY_NAME }}
+      DOCKER_IMAGE_NAME: ${{ env.DOCKER_IMAGE_NAME }}
+      DIST_DIR: ${{ env.DIST_DIR }}
+      BUILD_TAGS: ${{ env.BUILD_TAGS }}
+      PORT: ${{ env.PORT }}
     steps:
     - uses: actions/checkout@v3
     - uses: actions/setup-go@v4
       with:
         go-version: '1.22.5'
-    - name: Build
-      run: make build
-    - name: Test
-      run: make test
-    - name: Lint
-      run: make lint
+    - run: make build
+    - run: make test
+    - run: make lint
